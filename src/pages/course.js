@@ -1,10 +1,24 @@
-import { Text, StyleSheet, View, Dimensions, ScrollView  } from "react-native"
+import { useState } from "react";
+import { Text, StyleSheet, View, Dimensions, ScrollView, Button  } from "react-native"
 import MapView from 'react-native-maps';
 export const Course = ({route}) => {
-    const {name, img, campus, shift, worload, location, related, videoLink, wppCordinationPhone, cordinator, emailContact, site} = route.params
+    const {name, img, campus, shift, worload, location, related, videoLink, wppCordinationPhone, cordinator, emailContact, site} = route.params.course
+    const [favorite, setFavorite] = useState(route.params.favoriteCourses.includes(name))
+
+    const includeFav = () => {
+        route.params.setFavoriteCourses(route.params.favoriteCourses.concat(name))
+    }
+
+    const removeFav = () => {
+        route.params.setFavoriteCourses(route.params.favoriteCourses.filter(e => e !== name))
+    }
     return (
         <View style={styles.course}>
+            {favorite ?
+                <Text style={styles.star}>⭐</Text> : <></>
+            }
             <ScrollView>
+                <Text/>
                 <Text> Curso de {JSON.stringify(name).replace(/"/g, '')}</Text>
                 <Text/>
                 <Text>Câmpus no qual o curso é realizado: {JSON.stringify(campus).replace(/"/g, '')}</Text>
@@ -17,6 +31,12 @@ export const Course = ({route}) => {
                 <Text/>
                 <Text>Email de contato: {JSON.stringify(emailContact).replace(/"/g, '')}</Text>
                 <Text/>
+                <Button
+                    onPress={()=>{setFavorite(!favorite), !favorite? includeFav() : removeFav()}}
+                    title={favorite ? "Remover dos Favoritos" : "Adicionar aos Favoritos"}
+                    color="#841584"
+                    accessibilityLabel="Learn more about this purple button"
+                />
             </ScrollView>
             <MapView
                 style={styles.map}
@@ -32,6 +52,12 @@ export const Course = ({route}) => {
 }
 
 const styles = StyleSheet.create({
+    star: {
+        position: 'absolute',
+        fontSize: 25,
+        right: 20,
+        top: 10,
+    },
     course: {
         flex: 1,
         justifyContent: 'center',

@@ -4,12 +4,12 @@ import { Link } from '@react-navigation/native';
 
 const jsonData= require('../server/data.json');
 export const Home = ({navigation}) => {
-
+    const [favoriteCourses, setFavoriteCourses] = useState([]);
     const [courses, setCourses] = useState([]);
     useEffect(() => {
         setCourses(jsonData.data);
-        BackHandler.addEventListener('hardwareBackPress', () => true);
-    }, [jsonData])
+        // BackHandler.addEventListener('hardwareBackPress', () => true);
+    }, [])
 
     return (
         <View style={styles.home}>
@@ -19,10 +19,14 @@ export const Home = ({navigation}) => {
             <Text/>
             {courses?.map((course, i) => (
                 <View key={i}>
-                    <Button title={course.name} onPress={() => navigation.navigate('Course', course)} key={i}/>
+                    <Button title={course.name} onPress={() => navigation.navigate('Course', {course: course, favoriteCourses: favoriteCourses, setFavoriteCourses: setFavoriteCourses})} key={i}/>
                     <Text/>
                 </View>
-            ))}                
+            ))}
+            <Text/>
+            <Text/>
+            <Text/>
+            <Button title="Ver Favoritos" onPress={() => navigation.navigate('Favorite', favoriteCourses)}/>       
         </View>
     )
 }
