@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Text, StyleSheet, View, Dimensions, ScrollView, Button  } from "react-native"
+import { Text, StyleSheet, View, Dimensions, ScrollView, Button, Image  } from "react-native"
 import MapView from 'react-native-maps';
 export const Course = ({route}) => {
-    const {name, img, campus, shift, worload, location, related, videoLink, wppCordinationPhone, cordinator, emailContact, site} = route.params.course
+    const {name, img, campus, shift, workload, location, relatedImgs, videoLink, wppCordinationPhone, cordinator, emailContact, site} = route.params.course
     const [favorite, setFavorite] = useState(route.params.favoriteCourses.includes(name))
 
     const includeFav = () => {
@@ -17,7 +17,7 @@ export const Course = ({route}) => {
             {favorite ?
                 <Text style={styles.star}>⭐</Text> : <></>
             }
-            <ScrollView>
+            <ScrollView style={styles.scrollView}>
                 <Text/>
                 <Text> Curso de {JSON.stringify(name).replace(/"/g, '')}</Text>
                 <Text/>
@@ -25,10 +25,12 @@ export const Course = ({route}) => {
                 <Text/>
                 <Text> Turno(s): {shift.map((turn)=> (<>{turn}; </>))}</Text>
                 <Text/>
-                <Text>Total de Horas: {JSON.stringify(worload)}</Text>
+                <Text>Total de Horas: {JSON.stringify(workload).replace(/"/g, '')}</Text>
                 <Text/>
                 <Text>Coordenador: {JSON.stringify(cordinator).replace(/"/g, '')}</Text>
                 <Text/>
+                <Image style={styles.image}  title="image" source={{uri: JSON.stringify(img).replace(/"/g, '')}} ></Image>
+
                 <Text>Email de contato: {JSON.stringify(emailContact).replace(/"/g, '')}</Text>
                 <Text/>
                 <Button
@@ -58,10 +60,18 @@ const styles = StyleSheet.create({
         right: 20,
         top: 10,
     },
+    scrollView: {
+        margin: 'auto'
+    },
     course: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    image: {
+        width: 320,
+        height:160,
+        margin: 'auto'
     },
     container: {
         flex: 1,

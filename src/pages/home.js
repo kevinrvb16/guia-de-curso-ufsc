@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, StyleSheet, BackHandler, Button, Text } from 'react-native';
+import { View, StyleSheet, BackHandler, Button, Text, Image } from 'react-native';
 import { Link } from '@react-navigation/native';
 
 const jsonData= require('../server/data.json');
@@ -15,6 +15,7 @@ export const Home = ({navigation}) => {
         <View style={styles.home}>
             <Text>Bem vindo!</Text>
             <Text/>
+            <Image style={styles.image} source={require('../assets/Brasao_UFSC.png')}/>
             <Text>Selecione o curso:</Text>
             <Text/>
             {courses?.map((course, i) => (
@@ -37,4 +38,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+
+    image: {
+        height:110,
+        width:110,
+
+    }
   })
