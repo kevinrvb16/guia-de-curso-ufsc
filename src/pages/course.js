@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { Text, StyleSheet, View, Dimensions, ScrollView, Button, Image  } from "react-native"
+import { Text, StyleSheet, View, Dimensions, ScrollView, Button, Image, Linking  } from "react-native"
 import MapView from 'react-native-maps';
 export const Course = ({route}) => {
     const {name, img, campus, shift, workload, location, relatedImgs, videoLink, wppCordinationPhone, cordinator, emailContact, site} = route.params.course
     const [favorite, setFavorite] = useState(route.params.favoriteCourses.includes(name))
-
+    const message = "Olá coordenador(a), gostaria de tirar uma dúvida"
+    const whatsApp = () => {
+        Linking.openURL(`whatsapp://send?text=${message}&phone=${wppCordinationPhone}`);
+    }
     const includeFav = () => {
         route.params.setFavoriteCourses(route.params.favoriteCourses.concat(name))
     }
@@ -23,6 +26,9 @@ export const Course = ({route}) => {
                 <Text/>
                 <Text>Câmpus no qual o curso é realizado: {JSON.stringify(campus).replace(/"/g, '')}</Text>
                 <Text/>
+                <Button 
+                    onPress={whatsApp}
+                    title={"WhatsApp Coordenador"} />
                 <Text> Turno(s): {shift.map((turn)=> (<>{turn}; </>))}</Text>
                 <Text/>
                 <Text>Total de Horas: {JSON.stringify(workload).replace(/"/g, '')}</Text>
