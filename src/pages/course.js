@@ -23,21 +23,25 @@ export const Course = ({route}) => {
             <ScrollView style={styles.scrollView}>
                 <Text/>
                 <Text> Curso de {JSON.stringify(name).replace(/"/g, '')}</Text>
+                <Button onPress={() => Linking.openURL(site) }
+                title="Site do curso" />
                 <Text/>
                 <Text>Câmpus no qual o curso é realizado: {JSON.stringify(campus).replace(/"/g, '')}</Text>
                 <Text/>
-                <Button 
-                    onPress={whatsApp}
-                    title={"WhatsApp Coordenador"} />
                 <Text> Turno(s): {shift.map((turn)=> (<>{turn}; </>))}</Text>
                 <Text/>
                 <Text>Total de Horas: {JSON.stringify(workload).replace(/"/g, '')}</Text>
                 <Text/>
                 <Text>Coordenador: {JSON.stringify(cordinator).replace(/"/g, '')}</Text>
+                <Button 
+                    onPress={whatsApp}
+                    title={"WhatsApp Coordenador"} />
                 <Text/>
                 <Image style={styles.image}  title="image" source={{uri: JSON.stringify(img).replace(/"/g, '')}} ></Image>
 
                 <Text>Email de contato: {JSON.stringify(emailContact).replace(/"/g, '')}</Text>
+                <Button onPress={() => Linking.openURL(`mailto:${emailContact}`) }
+                    title="Enviar e-mail" />
                 <Text/>
                 <Button
                     onPress={()=>{setFavorite(!favorite), !favorite? includeFav() : removeFav()}}
