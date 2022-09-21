@@ -43,8 +43,13 @@ export const Course = ({route}) => {
                 <Button onPress={() => Linking.openURL(`mailto:${emailContact}`) }
                     title="Enviar e-mail" />
                 <Text/>
+                <Text>Imagens da sala de aula do curso:</Text>
+                {relatedImgs?.map((img, i) => (
+                    <Image key={i} style={styles.image}  title="image" source={{uri: img}} />
+                ))}
+                <Text/>
                 <Button
-                    onPress={()=>{setFavorite(!favorite), !favorite? includeFav() : removeFav()}}
+                    onPress={()=>(setFavorite(!favorite), !favorite? includeFav() : removeFav())}
                     title={favorite ? "Remover dos Favoritos" : "Adicionar aos Favoritos"}
                     color="#841584"
                     accessibilityLabel="Learn more about this purple button"

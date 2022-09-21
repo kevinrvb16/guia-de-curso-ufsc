@@ -8,7 +8,7 @@
             "workload": "3600h",
             "location": { "latitude": -27.5969, "longitude": -48.5495 },
             "relatedImgs": [
-
+                "https://ctc.paginas.ufsc.br/files/2020/02/4b79ec68-a8b3-4d1e-a6b8-e50492bd255e-1024x576.jpg", "https://medicina.paginas.ufsc.br/files/2017/02/Sala02OK.jpg"
             ],
             "videoLink": "https://www.youtube.com/watch?v=BnjCp02DZFY&ab_channel=Egoc%C3%AAntricoCanal",
             "wppCordinationPhone": "+5547996682421",
@@ -23,7 +23,7 @@
             "shift": ["Noturno", "Diurno"],
             "workload": "4200h",
             "location": { "latitude": -27.5969, "longitude": -48.5495 },
-            "relatedImgs": [
+            "relatedImgs": [ "https://ctc.paginas.ufsc.br/files/2020/02/4b79ec68-a8b3-4d1e-a6b8-e50492bd255e-1024x576.jpg", "https://medicina.paginas.ufsc.br/files/2017/02/Sala02OK.jpg"
 
             ],
             "videoLink": "https://www.youtube.com/watch?v=BnjCp02DZFY&ab_channel=Egoc%C3%AAntricoCanal",
@@ -40,7 +40,7 @@
             "workload": "4000h",
             "location": { "latitude": -27.5969, "longitude": -48.5495 },
             "relatedImgs": [
-
+                "https://ctc.paginas.ufsc.br/files/2020/02/4b79ec68-a8b3-4d1e-a6b8-e50492bd255e-1024x576.jpg", "https://medicina.paginas.ufsc.br/files/2017/02/Sala02OK.jpg"
             ],
             "videoLink": "https://www.youtube.com/watch?v=BnjCp02DZFY&ab_channel=Egoc%C3%AAntricoCanal",
             "wppCordinationPhone": "+5547996682421",
@@ -56,7 +56,7 @@
             "workload": "4400h",
             "location": { "latitude": -27.5969, "longitude": -48.5495 },
             "relatedImgs": [
-
+                "https://ctc.paginas.ufsc.br/files/2020/02/4b79ec68-a8b3-4d1e-a6b8-e50492bd255e-1024x576.jpg", "https://medicina.paginas.ufsc.br/files/2017/02/Sala02OK.jpg"
             ],
             "videoLink": "https://www.youtube.com/watch?v=BnjCp02DZFY&ab_channel=Egoc%C3%AAntricoCanal",
             "wppCordinationPhone": "+5547996682421",
@@ -72,7 +72,7 @@
             "workload": "3200h",
             "location": { "latitude": -27.5969, "longitude": -48.5495 },
             "relatedImgs": [
-
+                "https://ctc.paginas.ufsc.br/files/2020/02/4b79ec68-a8b3-4d1e-a6b8-e50492bd255e-1024x576.jpg", "https://medicina.paginas.ufsc.br/files/2017/02/Sala02OK.jpg"
             ],
             "videoLink": "https://www.youtube.com/watch?v=BnjCp02DZFY&ab_channel=Egoc%C3%AAntricoCanal",
             "wppCordinationPhone": "+5547996682421",
