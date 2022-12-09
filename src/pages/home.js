@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { View, StyleSheet, BackHandler, Button, Text, Image } from 'react-native';
-import { Link } from '@react-navigation/native';
 
 const jsonData= require('../server/data.json');
 export const Home = ({navigation}) => {
@@ -8,7 +7,7 @@ export const Home = ({navigation}) => {
     const [courses, setCourses] = useState([]);
     useEffect(() => {
         setCourses(jsonData.data);
-        // BackHandler.addEventListener('hardwareBackPress', () => true);
+        BackHandler.addEventListener('hardwareBackPress', () => true);
     }, [])
 
     return (
@@ -20,7 +19,7 @@ export const Home = ({navigation}) => {
             <Text/>
             {courses?.map((course, i) => (
                 <View key={i}>
-                    <Button title={course.name} onPress={() => navigation.navigate('Course', {course: course, favoriteCourses: favoriteCourses, setFavoriteCourses: setFavoriteCourses})} key={i}/>
+                    <Button title={course.name} onPress={() => navigation.navigate('Course', {course: course, favoriteCourses: favoriteCourses, setFavoriteCourses: setFavoriteCourses})}/>
                     <Text/>
                 </View>
             ))}

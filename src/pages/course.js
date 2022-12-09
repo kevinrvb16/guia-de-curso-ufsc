@@ -1,8 +1,21 @@
-import { useState } from "react";
-import { Text, StyleSheet, View, Dimensions, ScrollView, Button, Image, Linking  } from "react-native"
+import { useCallback, useState } from "react";
+import { Text, StyleSheet, View, Dimensions, ScrollView, Button, Image, Linking, Alert } from "react-native"
 import MapView from 'react-native-maps';
-export const Course = ({route}) => {
-    const {name, img, campus, shift, workload, location, relatedImgs, videoLink, wppCordinationPhone, cordinator, emailContact, site} = route.params.course
+import YoutubePlayer from "react-native-youtube-iframe";
+export const Course = ({ route }) => {
+    const [playing, setPlaying] = useState(false);
+
+    const onStateChange = useCallback((state) => {
+        if (state === "ended") {
+            setPlaying(false);
+        }
+    }, []);
+
+    const togglePlaying = useCallback(() => {
+        setPlaying((prev) => !prev);
+    }, []);
+
+    const { name, img, campus, shift, workload, location, relatedImgs, videoLink, wppCordinationPhone, cordinator, emailContact, site } = route.params.course
     const [favorite, setFavorite] = useState(route.params.favoriteCourses.includes(name))
     const message = "Olá coordenador(a), gostaria de tirar uma dúvida"
     const whatsApp = () => {
@@ -21,39 +34,50 @@ export const Course = ({route}) => {
                 <Text style={styles.star}>⭐</Text> : <></>
             }
             <ScrollView style={styles.scrollView}>
-                <Text/>
-                <Text> Curso de {JSON.stringify(name).replace(/"/g, '')}</Text>
-                <Button onPress={() => Linking.openURL(site) }
-                title="Site do curso" />
-                <Text/>
+                <Text />
+                <Text style={styles.txt}> Curso de {JSON.stringify(name).replace(/"/g, '')}</Text>
+                <Button onPress={() => Linking.openURL(site)}
+                    title="Site do curso" />
+                <Text />
                 <Text>Câmpus no qual o curso é realizado: {JSON.stringify(campus).replace(/"/g, '')}</Text>
-                <Text/>
-                <Text> Turno(s): {shift.map((turn)=> (<>{turn}; </>))}</Text>
-                <Text/>
+                <Text />
+                <Text />
+                <Text> Turno(s): {shift.map((turn, i) => (<Text key={i}>{turn}; </Text>))}</Text>
+                <Text />
                 <Text>Total de Horas: {JSON.stringify(workload).replace(/"/g, '')}</Text>
-                <Text/>
+                <Text />
                 <Text>Coordenador: {JSON.stringify(cordinator).replace(/"/g, '')}</Text>
-                <Button 
+                <Text />
+                <Button
                     onPress={whatsApp}
                     title={"WhatsApp Coordenador"} />
-                <Text/>
-                <Image style={styles.image}  title="image" source={{uri: JSON.stringify(img).replace(/"/g, '')}} ></Image>
-
+                <Text />
+                <Image style={styles.image} title="image" source={{ uri: JSON.stringify(img).replace(/"/g, '') }} ></Image>
+                <Text />
                 <Text>Email de contato: {JSON.stringify(emailContact).replace(/"/g, '')}</Text>
-                <Button onPress={() => Linking.openURL(`mailto:${emailContact}`) }
+                <Button onPress={() => Linking.openURL(`mailto:${emailContact}`)}
                     title="Enviar e-mail" />
-                <Text/>
+                <Text />
                 <Text>Imagens da sala de aula do curso:</Text>
                 {relatedImgs?.map((img, i) => (
-                    <Image key={i} style={styles.image}  title="image" source={{uri: img}} />
+                    <Image key={i} style={styles.image} title="image" source={{ uri: img }} />
                 ))}
-                <Text/>
+                <Text />
                 <Button
-                    onPress={()=>(setFavorite(!favorite), !favorite? includeFav() : removeFav())}
+                    onPress={() => (setFavorite(!favorite), !favorite ? includeFav() : removeFav())}
                     title={favorite ? "Remover dos Favoritos" : "Adicionar aos Favoritos"}
                     color="#841584"
                     accessibilityLabel="Learn more about this purple button"
                 />
+                {/* <View>
+                    <YoutubePlayer
+                        height={200}
+                        play={playing}
+                        videoId={"aF5XXU58kTE"}
+                        onChangeState={onStateChange}
+                    />
+                    <Button title={playing ? "pause" : "play"} onPress={togglePlaying} />
+                </View> */}
             </ScrollView>
             <MapView
                 style={styles.map}
@@ -63,7 +87,7 @@ export const Course = ({route}) => {
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }}
-            /> 
+            />
         </View>
     )
 }
@@ -74,6 +98,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         right: 20,
         top: 10,
+        zIndex: 5,
     },
     scrollView: {
         margin: 'auto'
@@ -83,9 +108,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    txt: {
+        fontSize: 20,
+        textAlign: 'center',
+    },
     image: {
         width: 320,
-        height:160,
+        height: 160,
         margin: 'auto'
     },
     container: {
@@ -93,9 +122,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-      },
-      map: {
+    },
+    map: {
         width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height/2.2,
-      },
-  })
+        height: Dimensions.get('window').height / 2.2,
+    },
+})
